@@ -39,7 +39,7 @@ module Formitas
           end
         end
 
-        # Renderer for <input type="checkbox">
+        # Renderer a collection with <input type="checkbox">
         class Checkbox < self
           TYPE = :checkbox
 
@@ -56,18 +56,15 @@ module Formitas
             )
           end
 
-          def boolean
-            !!domain_value
-          end
-
           def checked_value
-            boolean ? 'checked' : ''
+            context.selected?(name) ? 'checked' : ''
           end
 
           def extra_input_attributes
             { :value => '1', :checked => checked_value }
           end
         end
+
       end
     end
   end

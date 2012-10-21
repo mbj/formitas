@@ -10,6 +10,7 @@ module Formitas
         label_renderer.render(option)
       end
 
+
       # Render a collection with <option> tags
       class Options < self
         def render

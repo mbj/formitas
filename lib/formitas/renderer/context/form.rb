@@ -6,17 +6,6 @@ module Formitas
       # Render a full form
       class Form < self
 
-        # Return html id
-        #
-        # @return [String]
-        #
-        # @api private
-        #
-        def html_id
-          name.to_s
-        end
-        memoize :html_id
-
         delegate :error?, :method, :action, :enctype
 
         # Return inner_html
@@ -76,18 +65,6 @@ module Formitas
         #
         def render_field(name)
           field_renderer(name).render
-        end
-
-        # Return html name
-        #
-        # @param [String] name
-        #
-        # @return [String]
-        #
-        # @api private
-        #
-        def html_name(name)
-          "#{self.name}[#{name}]"
         end
 
         # Return violations

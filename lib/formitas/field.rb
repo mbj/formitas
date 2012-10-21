@@ -37,13 +37,27 @@ module Formitas
     # Boolean field with true and false as domain values
     class Boolean < self
       DEFAULT_RENDERER = Renderer::Field::Input::Checkbox
+
+      def selected?(value)
+        value.equal?(true)
+      end
     end
 
-    # Select 
+    # Base class for value selections 
     class Select < self
-      DEFAULT_RENDERER = Renderer::Field::Select
+      include AbstractClass
 
       attribute :collection
+
+      # Form field with that allows a single selection
+      class Single < self
+        DEFAULT_RENDERER = Renderer::Field::Select::Single
+      end
+
+      # Form field with that allows multiple selections
+      class Single < self
+        DEFAULT_RENDERER = Renderer::Field::Select::Single
+      end
     end
   end
 end

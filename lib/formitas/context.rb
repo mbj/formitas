@@ -23,9 +23,24 @@ module Formitas
     # @return [nil]
     #   otherwise
     #
-    def html_value(name)
-      field = fields.get(name)
-      field.html_value(domain_value(name))
+    def html_value(field_name)
+      fields.get(field_name).html_value(domain_value(field_name))
+    end
+
+    # Return if field is selected
+    #
+    # @param [Symbol] name
+    #
+    # @return [true]
+    #   if field is selected
+    #
+    # @return [false]
+    #   otherwise
+    #
+    # @api privateo
+    #
+    def selected?(field_name)
+      field(field_name).selected?(domain_value(field_name))
     end
 
     # Return if context is in a valid state
@@ -48,6 +63,18 @@ module Formitas
     #
     def update(attributes)
       self.class.new(self.attributes.merge(attributes))
+    end
+
+    # Return field by name
+    #
+    # @param [Symbol] field_name
+    #
+    # @return [Field]
+    #
+    # @api private
+    #
+    def field(field_name)
+      fields.get(field_name)
     end
 
     # A form body without an action (nested form)

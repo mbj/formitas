@@ -1,8 +1,10 @@
 module Formitas
   class Renderer
     class Field
-      # Renderer for <select>
+      # Abstract base renderer for <select>
       class Select < self
+        include AbstractClass
+
         delegate :collection
         delegate :label_renderer
 
@@ -10,16 +12,20 @@ module Formitas
           label_renderer.render(option)
         end
 
-        def input_html
-          HTML.content_tag(:select, options_html, :id => html_id, :name => html_name)
-        end
+        # Render <select> with out multiple selections
+        class Single < self
 
-        def selected?(domain_value)
-          self.domain_value == domain_value
-        end
+          def input_html
+            HTML.content_tag(:select, options_html, :id => html_id, :name => html_name)
+          end
 
-        def options_html
-          Collection::Options.render(collection, self)
+          def selected?(domain_value)
+            self.domain_value == domain_value
+          end
+
+          def options_html
+            Collection::Options.render(collection, self)
+          end
         end
       end
     end

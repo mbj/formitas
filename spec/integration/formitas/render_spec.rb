@@ -41,7 +41,7 @@ describe Formitas, 'rendering' do
 
   let(:fields) do
     [
-      Formitas::Field::Select.build(
+      Formitas::Field::Select::Single.build(
         :membership,
         :collection => Formitas::Collection::Mapper.new(
           :mapping => {
@@ -51,7 +51,7 @@ describe Formitas, 'rendering' do
           :label_renderer => Formitas::Renderer::Label::Block.new { |object| object.domain_value.name.upcase }
         )
       ),
-      Formitas::Field::Select.build(
+      Formitas::Field::Select::Single.build(
         :surname, 
         :collection => Formitas::Collection::String.new(
           :strings => %w(Mr Mrs)

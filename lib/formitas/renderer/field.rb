@@ -127,7 +127,6 @@ module Formitas
       end
       memoize :html_name
 
-
       abstract_method :input_html
 
       # Return errors html
