@@ -55,7 +55,7 @@ module Formitas
       end
 
       # Form field with that allows multiple selections
-      class Single < self
+      class Multiple < self
         DEFAULT_RENDERER = Renderer::Field::Select::Single
       end
     end
