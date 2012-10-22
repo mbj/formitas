@@ -39,7 +39,7 @@ module Formitas
           end
         end
 
-        # Renderer a collection with <input type="checkbox">
+        # Abstract <input type="checkbox"> renderer
         class Checkbox < self
           include AbstractClass
 
@@ -58,6 +58,7 @@ module Formitas
 
           abstract_method :selected?
 
+          # Renderer for boolena checkbox
           class Boolean < self
 
             def selected?

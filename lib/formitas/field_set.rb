@@ -1,4 +1,5 @@
 module Formitas
+  # An indexed set of fields
   class FieldSet
     include Adamantium, Enumerable
 

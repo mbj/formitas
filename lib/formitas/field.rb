@@ -51,10 +51,6 @@ module Formitas
       include Equalizer.new(:renderer)
 
       DEFAULT_RENDERER = Renderer::Field::Input::Checkbox::Boolean
-
-      def selected?(value)
-        value.equal?(true)
-      end
     end
 
     # Base class for value selections 
