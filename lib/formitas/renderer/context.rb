@@ -19,6 +19,20 @@ module Formitas
       end
       memoize :html_id
 
+      # Test if context is valid
+      #
+      # @return [true] 
+      #   if there are no violations
+      #
+      # @return [false]
+      #  otherwise
+      #
+      # @api private
+      #
+      def valid?
+        violations.empty?
+      end
+
       # Return html name
       #
       # @param [Field] name

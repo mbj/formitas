@@ -177,6 +177,13 @@ describe Formitas, 'rendering' do
 
   context 'with resource and errors' do
 
+    it 'should yield on error' do
+      yields = []
+      form.renderer.on_error { yields << :yield }
+
+      yields.should eql([:yield])
+    end
+
     let(:form) { empty_form.with_resource(invalid_resource) }
 
     it 'should render expected html' do
