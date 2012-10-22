@@ -51,7 +51,13 @@ module Formitas
           memoize :checked_value
 
           def extra_input_attributes
-            { :value => html_value, :checked => checked_value }
+            attributes = { :value => html_value }
+
+            if selected?
+              attributes[:checked]='checked'
+            end
+
+            attributes
           end
 
           abstract_method :html_value

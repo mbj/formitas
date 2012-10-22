@@ -26,7 +26,7 @@ unit_spec do
 
     it 'should produce correct html' do
       split_html(subject.to_s).should eql(compress(<<-HTML))
-        <input id="example_field_name" type="checkbox" name="example[field_name]" value="some_value" checked=""/>
+        <input id="example_field_name" type="checkbox" name="example[field_name]" value="some_value"/>
       HTML
     end
 
