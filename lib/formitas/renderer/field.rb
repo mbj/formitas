@@ -149,21 +149,19 @@ module Formitas
       # @api private
       #
       def html_value
-        context.html_value(name)
+        binding.html_value
       end
       memoize :html_value
 
-      # Return domain value if any
+      # Return binding
       #
-      # @return [Object]
-      #   if value is present
+      # @return [Binding]
       #
       # @api private
       #
-      def domain_value
-        context.domain_value(name)
+      def binding
+        context.binding(name)
       end
-      memoize :domain_value
 
       # Test if input is valid for field
       #
@@ -186,7 +184,7 @@ module Formitas
       # @api private
       #
       def field_violations
-        context.violations(name)
+        context.field_violations(name)
       end
       memoize :field_violations
 

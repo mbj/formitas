@@ -2,7 +2,7 @@ module Formitas
 
   # Abstract base class for renderers
   class Renderer
-    include Adamantium, AbstractClass
+    include Adamantium, AbstractClass, Delegator.new(:object)
 
     # Render object
     #
@@ -13,39 +13,6 @@ module Formitas
     def self.render(*args)
       new(*args).render
     end
-
-    # Define delegators
-    #
-    # @param [Symbol] *names
-    #
-    # @return [self]
-    #
-    # @api private
-    #
-    def self.delegate(*names)
-      names.each do |name|
-        delegate_method(name)
-      end
-    end
-    private_class_method :delegate
-
-    # Define delegator
-    #
-    # @param [Symbol] name
-    #
-    # @return [self]
-    #
-    # @api private
-    #
-    def self.delegate_method(name)
-      class_eval(<<-RUBY, __FILE__, __LINE__+1)
-        def #{name}(*args)
-          @object.#{name}(*args)
-        end
-      RUBY
-    end
-    private_class_method :delegate_method
-
 
     # Return rendered object
     #

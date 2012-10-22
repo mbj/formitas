@@ -8,7 +8,7 @@ unit_spec do
   let(:violation) { mock('Violation')            }
 
   before do
-    context.stub(:violations => violations)
+    context.stub(:field_violations).with(:foo).and_return(violations)
   end
 
   context 'when there are errors' do

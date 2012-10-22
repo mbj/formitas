@@ -4,6 +4,7 @@ require 'anima'
 require 'rack'
 require 'i18n'
 require 'aequitas'
+require 'delegator'
 
 module Formitas
 
@@ -52,14 +53,15 @@ module Formitas
     Undefined
   end
 
+  EmptyViolationSet = Class.new do
+    include Adamantium
+    def inspect; self.class.name; end
+    def on(name); []; end
+    def self.name; 'Formitas::EmptyViolationSet'; end
+  end.new
+
 
   module Validator
-    EmptyViolationSet = Class.new do
-      include Adamantium
-      def inspect; self.class.name; end
-      def on(name); []; end
-      def self.name; 'Formitas::Validator::EmptyViolationSet'; end
-    end.new
 
     Valid = Class.new do
       include Adamantium
@@ -70,29 +72,6 @@ module Formitas
     end.new
   end
 
-  class FieldSet
-    include Enumerable
-
-    def initialize(fields=[])
-      @index = {}
-      fields.each do |field|
-        add(field)
-      end
-    end
-
-    def each(&block)
-      @index.values.each(&block)
-    end
-
-    def get(name)
-      @index.fetch(name)
-    end
-
-    def add(field)
-      @index[field.name] = field
-      self
-    end
-  end
 end
 
 require 'formitas/html'
@@ -109,7 +88,10 @@ require 'formitas/renderer/field/textarea'
 require 'formitas/renderer/violation'
 require 'formitas/renderer/violation_set'
 
+require 'formitas/form'
 require 'formitas/field'
+require 'formitas/field_set'
+require 'formitas/binding'
 require 'formitas/context'
 require 'formitas/collection'
 require 'formitas/option'

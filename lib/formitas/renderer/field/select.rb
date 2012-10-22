@@ -20,7 +20,7 @@ module Formitas
           end
 
           def selected?(domain_value)
-            self.domain_value == domain_value
+            binding.domain_value == domain_value
           end
 
           def options_html

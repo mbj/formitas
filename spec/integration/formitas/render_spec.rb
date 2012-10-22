@@ -2,17 +2,50 @@ require 'spec_helper'
 require 'virtus'
 
 describe Formitas, 'rendering' do
-  subject { object.render }
+  subject { renderer.render }
 
-  let(:object) { Formitas::Renderer::Context::Form.new(form) }
+  let(:renderer) { Formitas::Renderer::Context::Form.new(form) }
   
-  let(:form) do
-    Formitas::Context::Form.new(
-      attributes.merge(
-        :method    => 'post',
-        :enctype   => 'www-form-urlencoded',
-        :action    => '/some/target',
-      )
+  let(:empty_form) do
+    Formitas::Form.new(
+      :context   => empty_context,
+      :method    => 'post',
+      :enctype   => 'www-form-urlencoded',
+      :action    => '/some/target'
+    )
+  end
+
+  let(:invalid_resource) do
+    model.new(:name => 'Markus Schirp')
+  end
+
+  let(:valid_resource) do
+    model.new(
+      :membership => membership_a,
+      :surname => 'Mr', 
+      :name => 'Markus Schirp', 
+      :terms_of_service => true,
+      :text => 'Foo'
+    )
+  end
+
+  let(:validator) do
+    Class.new do
+      include Aequitas::Validator
+      validates_presence_of :membership
+      validates_presence_of :surname
+      validates_presence_of :name
+      validates_presence_of :text
+      validates_acceptance_of :terms_of_service
+    end
+  end
+
+
+  let(:empty_context) do
+    Formitas::Context::Empty.new(
+      :name      => :person,
+      :validator => validator,
+      :fields    => Formitas::FieldSet.new(fields)
     )
   end
 
@@ -63,15 +96,8 @@ describe Formitas, 'rendering' do
     ]
   end
 
-  context 'with empty input and no errors' do
-    let(:attributes) do
-      {
-        :name      => :person,
-        :values    => Formitas::Values::Empty,
-        :validator => Formitas::Validator::Valid,
-        :fields    => Formitas::FieldSet.new(fields)
-      }
-    end
+  context 'with empty form' do
+    let(:form) { empty_form }
 
     it 'should render expected html' do
       subject.to_s.split('><').join(">\n<").should eql(compress(<<-HTML))
@@ -110,26 +136,9 @@ describe Formitas, 'rendering' do
 
   end
 
-  context 'with input' do
+  context 'with valid resource' do
 
-    let(:resource) do
-      model.new(
-        :membership => membership_a,
-        :surname => 'Mr', 
-        :name => 'Markus Schirp', 
-        :terms_of_service => true,
-        :text => 'Foo'
-      )
-    end
-
-    let(:attributes) do
-      {
-        :name      => :person,
-        :values    => Formitas::Values::Proxy.new(resource),
-        :validator => Formitas::Validator::Valid,
-        :fields    => Formitas::FieldSet.new(fields)
-      }
-    end
+    let(:form) { empty_form.with_resource(valid_resource) }
 
     it 'should render expected html' do
       subject.to_s.split('><').join(">\n<").should eql(compress(<<-HTML))
@@ -166,31 +175,9 @@ describe Formitas, 'rendering' do
     end
   end
 
-  context 'with input and errors' do
+  context 'with resource and errors' do
 
-    let(:validator) do
-      Class.new do
-        include Aequitas::Validator
-        validates_presence_of :membership
-        validates_presence_of :surname
-        validates_presence_of :name
-        validates_presence_of :text
-        validates_acceptance_of :terms_of_service
-      end
-    end
-
-    let(:resource) do
-      model.new(:name => 'Markus Schirp')
-    end
-
-    let(:attributes) do
-      {
-        :name      => :person,
-        :values    => Formitas::Values::Proxy.new(resource),
-        :validator => validator.new(resource),
-        :fields    => Formitas::FieldSet.new(fields)
-      }
-    end
+    let(:form) { empty_form.with_resource(invalid_resource) }
 
     it 'should render expected html' do
       subject.to_s.split('><').join(">\n<").should eql(compress(<<-HTML))

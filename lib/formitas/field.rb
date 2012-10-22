@@ -17,6 +17,18 @@ module Formitas
     attribute :name
     attribute :renderer, DefaultRenderer
 
+    # Return binding for domain value
+    #
+    # @param [Object] domain_value
+    #
+    # @return [Binding::Domain]
+    #
+    # @api private
+    #
+    def bind(domain_value)
+      Binding::Domain.new(self, domain_value)
+    end
+
     def self.default_renderer
       self::DEFAULT_RENDERER
     end
@@ -36,7 +48,9 @@ module Formitas
 
     # Boolean field with true and false as domain values
     class Boolean < self
-      DEFAULT_RENDERER = Renderer::Field::Input::Checkbox
+      include Equalizer.new(:renderer)
+
+      DEFAULT_RENDERER = Renderer::Field::Input::Checkbox::Boolean
 
       def selected?(value)
         value.equal?(true)

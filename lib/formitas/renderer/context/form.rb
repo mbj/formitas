@@ -67,16 +67,16 @@ module Formitas
           field_renderer(name).render
         end
 
-        # Return violations
+        # Return field violations
         #
-        # @param [String] name
+        # @param [Symbol] name
         #
         # @return [Enumerable<Violation>]
         #
         # @api private
         #
-        def violations(name)
-          object.validator.violations.on(name)
+        def field_violations(name)
+          violations.on(name)
         end
       end
     end

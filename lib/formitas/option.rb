@@ -7,6 +7,6 @@ module Formitas
     attribute :html_value
     attribute :domain_value
 
-    include Equalizer.new(attribute_set.map(&:name))
+    include Equalizer.new(*attribute_set.map(&:name))
   end
 end

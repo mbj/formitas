@@ -1,105 +1,108 @@
 module Formitas
-
-  # Context of a named form element with fields
+  # Abstract context without values
   class Context
     include Anima, Adamantium
 
     attribute :name
     attribute :fields
-    attribute :values
     attribute :validator
 
-    def domain_value(name)
-      values.get(name)
-    end
-
-    # Return html value of named field
+    # Return binding for name
     #
     # @param [Symbol] name
     #
-    # @return [String]
-    #   if value is present
+    # @return [Binding::Domain]
     #
-    # @return [nil]
-    #   otherwise
+    # @api private
     #
-    def html_value(field_name)
-      fields.get(field_name).html_value(domain_value(field_name))
+    def binding(name)
+      field(name).bind(domain_value(name))
     end
 
-    # Return if field is selected
+    # Return field for name
     #
     # @param [Symbol] name
-    #
-    # @return [true]
-    #   if field is selected
-    #
-    # @return [false]
-    #   otherwise
-    #
-    # @api privateo
-    #
-    def selected?(field_name)
-      field(field_name).selected?(domain_value(field_name))
-    end
-
-    # Return if context is in a valid state
-    #
-    # @return [true]
-    #   if valid
-    #
-    # @return [false]
-    #   otherwise
-    #
-    # @api private
-    #
-    def valid?
-      validator.valid?
-    end
-
-    # Return mutated context
-    #
-    # @api private
-    #
-    def update(attributes)
-      self.class.new(self.attributes.merge(attributes))
-    end
-
-    # Return field by name
-    #
-    # @param [Symbol] field_name
     #
     # @return [Field]
     #
     # @api private
     #
-    def field(field_name)
-      fields.get(field_name)
+    def field(name)
+      fields.get(name)
     end
 
-    # A form body without an action (nested form)
-    class Body < self
+    # Return violations
+    #
+    # @api private
+    #
+    def violations
+      validator.new(resource).violations
     end
+    memoize :violations
 
-    # A form context with action (root form)
-    class Form < self
-      include Anima, Adamantium
+  private
 
-      attribute :action
-      attribute :method
-      attribute :enctype
-
-      # Return form renderer
-      #
-      # @return [Renderer::Form]
-      #
-      # @api private
-      #
-      def renderer
-        Renderer::Context::Form.new(self)
-      end
-      memoize :renderer
+    # Return domain value
+    #
+    # @param [Symbol] name
+    #
+    # @api private
+    #
+    def domain_value(name)
+      resource.public_send(name)
     end
   end
 
+  class Context
+    # Context for empty forms
+    class Empty  < self
+
+      # Return binding for name
+      #
+      # @param [Symbol] name
+      #
+      # @return [Binding::Empty]
+      #
+      def binding(field_name)
+        Binding::Empty.new(field(field_name))
+      end
+
+      # Return violations
+      #
+      # @return [Formtias::Validator::Valid]
+      #
+      # @api private
+      #
+      def violations
+        EmptyViolationSet
+      end
+
+      # Return context with resource
+      #
+      # @param [Resource] resource
+      #
+      # @api private
+      #
+      def with_resource(resource)
+        Resource.new(attributes.merge(:resource => resource))
+      end
+    end
+  
+    # Context initialized from html params
+    class HTML < self
+      attribute :params
+      attribute :domain_model
+      private :domain_model
+
+      def domain_object
+        domain_model.new(params)
+      end
+      memoize :domain_object
+    end
+
+    # Context initialized from domain object
+    class Resource < self
+      attribute :resource
+    end
+  end
 end

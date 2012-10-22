@@ -35,33 +35,52 @@ module Formitas
           TYPE = :text
 
           def extra_input_attributes
-            { :value => html_value }
+            { :value => binding.html_value }
           end
         end
 
         # Renderer a collection with <input type="checkbox">
         class Checkbox < self
+          include AbstractClass
+
           TYPE = :checkbox
 
-          def input_html
-            HTML.join([hidden_html, super])
-          end
-          memoize :input_html
-
-          def hidden_html
-            HTML.input(
-              :type => :hidden,
-              :name => html_name,
-              :value => '0'
-            )
-          end
-
           def checked_value
-            context.selected?(name) ? 'checked' : ''
+            selected?  ? 'checked' : ''
           end
+          memoize :checked_value
 
           def extra_input_attributes
-            { :value => '1', :checked => checked_value }
+            { :value => html_value, :checked => checked_value }
+          end
+
+          abstract_method :html_value
+
+          abstract_method :selected?
+
+          class Boolean < self
+
+            def selected?
+              binding.domain_value.equal?(true)
+            end
+            memoize :selected?
+
+            def html_value; '1'; end
+
+            def hidden_html
+              HTML.input(
+                :type => :hidden,
+                :name => html_name,
+                :value => '0'
+              )
+            end
+
+            def input_html
+              HTML.join([hidden_html, super])
+            end
+            memoize :input_html
+
+
           end
         end
 

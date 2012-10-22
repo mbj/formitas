@@ -6,7 +6,7 @@ module Formitas
       delegate :label, :html_value, :domain_value
 
       def selected?
-        @context.selected?(domain_value)
+        context.selected?(domain_value)
       end
       memoize :selected?
 

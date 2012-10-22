@@ -5,23 +5,8 @@ module Formitas
     class Context < self
 
       delegate :name
-      delegate :valid?
-      delegate :domain_value
-      delegate :html_value
-
-      # Test if field is selected
-      #
-      # @return [true]
-      #   if field is selected
-      #
-      # @return [false]
-      #   otherwise
-      #
-      # @api private
-      #  
-      def selected?(name)
-        object.selected?(name)
-      end
+      delegate :binding
+      delegate :violations
 
       # Return html id
       #
