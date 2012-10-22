@@ -57,6 +57,7 @@ module Formitas
     include Adamantium
     def inspect; self.class.name; end
     def on(name); []; end
+    def empty?; true; end
     def self.name; 'Formitas::EmptyViolationSet'; end
   end.new
 
