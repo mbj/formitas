@@ -4,7 +4,7 @@ require 'anima'
 require 'rack'
 require 'i18n'
 require 'aequitas'
-require 'delegator'
+require 'delegation'
 
 module Formitas
 

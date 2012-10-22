@@ -6,7 +6,7 @@ require 'adamantium'
 #
 # I do not need more than one delegation target per class, so I do not support more.
 #
-class Delegator < ::Module
+class Delegation < ::Module
   include Adamantium, AbstractClass, Equalizer.new(:target_name)
 
   attr_reader :target_name
