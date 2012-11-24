@@ -1,7 +1,7 @@
 module Formitas
   # An indexed set of fields
   class FieldSet
-    include Adamantium, Enumerable
+    include Adamantium::Flat, Enumerable
 
     def initialize(fields=[])
       @index = {}

@@ -5,7 +5,7 @@ module Formitas
 
   # Abstract base class for a form field 
   class Field
-    include Anima, AbstractClass, Adamantium
+    include Anima, AbstractClass, Adamantium::Flat
 
     # Attribute with default renderer lookup
     class DefaultRenderer < Anima::Attribute

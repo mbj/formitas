@@ -2,7 +2,7 @@ module Formitas
   class Renderer
     # Abstract class for rendering a collection
     class Collection < self
-      include AbstractClass, Adamantium
+      include AbstractClass, Adamantium::Flat
 
       delegate :label_renderer
 

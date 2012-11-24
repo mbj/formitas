@@ -1,7 +1,7 @@
 module Formitas
   # A form context with action (root form)
   class Form 
-    include Anima, Adamantium, Delegation.new(:context)
+    include Anima, Adamantium::Flat, Delegation.new(:context)
 
     attribute :action
     attribute :method

@@ -1,7 +1,7 @@
 module Formitas
   # Abstract collection base class
   class Collection
-    include Anima, AbstractClass, Enumerable, Adamantium
+    include Anima, AbstractClass, Enumerable, Adamantium::Flat
 
     # Attribute with default renderer lookup
     class DefaultLabelRenderer < Anima::Attribute

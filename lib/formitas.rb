@@ -54,7 +54,7 @@ module Formitas
   end
 
   EmptyViolationSet = Class.new do
-    include Adamantium
+    include Adamantium::Flat
     def inspect; self.class.name; end
     def on(name); []; end
     def empty?; true; end
@@ -65,7 +65,7 @@ module Formitas
   module Validator
 
     Valid = Class.new do
-      include Adamantium
+      include Adamantium::Flat
       def inspect; self.class.name; end
       def valid?; true; end
       def violations; EmptyViolationSet; end

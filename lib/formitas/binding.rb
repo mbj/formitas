@@ -2,7 +2,7 @@ module Formitas
 
   # Abstract base class for field with value
   class Binding
-    include Adamantium, AbstractClass
+    include Adamantium::Flat, AbstractClass
 
     abstract_method :html_value
     abstract_method :domain_value
