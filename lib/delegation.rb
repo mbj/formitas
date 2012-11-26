@@ -33,7 +33,7 @@ private
 
   # Class to bind subject and target together
   class Definer
-    include Adamantium, Equalizer.new(:scope, :target_name)
+    include Adamantium::Flat, Equalizer.new(:scope, :target_name)
 
     attr_reader :scope
     attr_reader :target_name
