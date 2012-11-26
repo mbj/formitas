@@ -33,7 +33,7 @@ module Formitas
     #
     def with_resource(domain_object)
       new_context = context.with_resource(domain_object)
-      self.class.new(attributes.merge(:context => new_context))
+      self.class.new(self.class.attributes(self).merge(:context => new_context))
     end
   end
 end

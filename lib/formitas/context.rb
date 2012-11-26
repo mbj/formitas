@@ -84,7 +84,7 @@ module Formitas
       # @api private
       #
       def with_resource(resource)
-        Resource.new(attributes.merge(:resource => resource))
+        Resource.new(self.class.attributes(self).merge(:resource => resource))
       end
     end
   
