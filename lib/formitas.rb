@@ -6,6 +6,7 @@ require 'rack'
 require 'i18n'
 require 'aequitas'
 require 'delegation'
+require 'html'
 
 module Formitas
 
@@ -76,7 +77,6 @@ module Formitas
 
 end
 
-require 'formitas/html'
 require 'formitas/renderer'
 require 'formitas/renderer/label'
 require 'formitas/renderer/context'

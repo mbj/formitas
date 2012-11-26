@@ -2,6 +2,9 @@ module Formitas
 
   # Abstract base class for renderers
   class Renderer
+    def self.freeze
+      raise
+    end
     include Adamantium::Flat, AbstractType, Delegation.new(:object)
 
     # Render object

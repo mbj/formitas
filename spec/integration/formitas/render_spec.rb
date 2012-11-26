@@ -31,7 +31,7 @@ describe Formitas, 'rendering' do
 
   let(:validator) do
     Class.new do
-      include Aequitas::Validator
+      include Aequitas
       validates_presence_of :membership
       validates_presence_of :surname
       validates_presence_of :name
