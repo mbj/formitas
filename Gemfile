@@ -7,3 +7,6 @@ gem 'anima',               :git => 'https://github.com/mbj/anima.git'
 gem 'inflector',           :git => 'https://github.com/mbj/inflector.git'
 gem 'i18n'
 gem 'rack'
+
+gem 'devtools',            :git => 'https://github.com/mbj/devtools.git', :branch => 'rspec-2-mutant'
+eval File.read('Gemfile.devtools')
