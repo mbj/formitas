@@ -123,7 +123,7 @@ describe Formitas, 'rendering' do
           <div class="input">
             <label for="person_terms_of_service">Terms of service</label>
             <input type="hidden" name="person[terms_of_service]" value="0"/>
-            <input id="person_terms_of_service" type="checkbox" name="person[terms_of_service]" value="1" checked=""/>
+            <input id="person_terms_of_service" type="checkbox" name="person[terms_of_service]" value="1"/>
           </div>
           <div class="input">
             <label for="person_text">Text</label>
