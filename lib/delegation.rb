@@ -1,4 +1,4 @@
-require 'abstract_class'
+require 'abstract_type'
 require 'equalizer'
 require 'adamantium'
 
