@@ -2,7 +2,7 @@ module Formitas
 
   # Abstract base class for renderers
   class Renderer
-    include Adamantium::Flat, AbstractClass, Delegation.new(:object)
+    include Adamantium::Flat, AbstractType, Delegation.new(:object)
 
     # Render object
     #

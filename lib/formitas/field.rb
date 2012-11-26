@@ -5,7 +5,7 @@ module Formitas
 
   # Abstract base class for a form field 
   class Field
-    include Anima, AbstractClass, Adamantium::Flat
+    include Anima, AbstractType, Adamantium::Flat
 
     # Attribute with default renderer lookup
     class DefaultRenderer < Anima::Attribute
@@ -55,7 +55,7 @@ module Formitas
 
     # Base class for value selections 
     class Select < self
-      include AbstractClass
+      include AbstractType
 
       attribute :collection
 

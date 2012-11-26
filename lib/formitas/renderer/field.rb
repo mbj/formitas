@@ -3,7 +3,7 @@ module Formitas
 
     # Abstract class for field renderers
     class Field < self
-      include AbstractClass
+      include AbstractType
 
       # Build field renderer
       #

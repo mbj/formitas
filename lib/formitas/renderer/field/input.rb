@@ -41,7 +41,7 @@ module Formitas
 
         # Abstract <input type="checkbox"> renderer
         class Checkbox < self
-          include AbstractClass
+          include AbstractType
 
           TYPE = :checkbox
 

@@ -1,3 +1,4 @@
+require 'abstract_type'
 require 'adamantium'
 require 'inflector'
 require 'anima'
@@ -11,7 +12,7 @@ module Formitas
   Undefined = Object.new.freeze
 
   class Values
-    include AbstractClass
+    include AbstractType
 
     Empty = Class.new(self) do
       def get(name); nil; end

@@ -3,7 +3,7 @@ module Formitas
     class Field
       # Abstract base renderer for <select>
       class Select < self
-        include AbstractClass
+        include AbstractType
 
         delegate :collection
         delegate :label_renderer

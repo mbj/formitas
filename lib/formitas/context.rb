@@ -1,7 +1,7 @@
 module Formitas
   # Abstract context without values
   class Context
-    include Adamantium::Flat, Anima, AbstractClass
+    include Adamantium::Flat, Anima, AbstractType
 
     attribute :name
     attribute :fields
