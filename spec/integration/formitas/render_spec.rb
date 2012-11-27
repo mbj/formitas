@@ -21,22 +21,26 @@ describe Formitas, 'rendering' do
 
   let(:valid_resource) do
     model.new(
-      :membership => membership_a,
-      :surname => 'Mr',
-      :name => 'Markus Schirp',
-      :terms_of_service => true,
-      :text => 'Foo'
+      :membership         => membership_a,
+      :surname            => 'Mr',
+      :name               => 'Markus Schirp',
+      :email              => 'mbj@seonic.net',
+      :email_confirmation => 'mbj@seonic.net',
+      :terms_of_service   => true,
+      :text               => 'Foo'
     )
   end
 
   let(:validator) do
     Class.new do
       include Aequitas
-      validates_presence_of :membership
-      validates_presence_of :surname
-      validates_presence_of :name
-      validates_presence_of :text
-      validates_acceptance_of :terms_of_service
+      validates_presence_of     :membership
+      validates_presence_of     :surname
+      validates_presence_of     :name
+      validates_presence_of     :text
+      validates_format_of       :email, :format => :email_address
+      validates_confirmation_of :email
+      validates_acceptance_of   :terms_of_service
 
       def self.name; "FormitasTestValidator"; end
       def self.inspect; name; end
@@ -70,12 +74,14 @@ describe Formitas, 'rendering' do
   let(:model) do
     Class.new do
       include Virtus
-      attribute :membership,        Object
-      attribute :surname,           String
-      attribute :name,              String
-      attribute :text,              String
-      attribute :terms_of_service,  Virtus::Attribute::Boolean
-
+      attribute :membership,         Object
+      attribute :surname,            String
+      attribute :name,               String
+      attribute :email,              String
+      attribute :email_confirmation, String
+      attribute :text,               String
+      attribute :terms_of_service,   Virtus::Attribute::Boolean
+                                     
       def self.name; 'FormitasTestModel'; end
       def inspect; self.class.name; end
     end
@@ -100,6 +106,8 @@ describe Formitas, 'rendering' do
         )
       ),
       Formitas::Field::String.build(:name),
+      Formitas::Field::String.build(:email),
+      Formitas::Field::String.build(:email_confirmation),
       Formitas::Field::Boolean.build(:terms_of_service),
       Formitas::Field::String.build(:text, :renderer => Formitas::Renderer::Field::Textarea)
     ]
@@ -128,6 +136,14 @@ describe Formitas, 'rendering' do
           <div class="input">
             <label for="person_name">Name</label>
             <input id="person_name" type="text" name="person[name]" value=""/>
+          </div>
+          <div class="input">
+            <label for="person_email">Email</label>
+            <input id="person_email" type="text" name="person[email]" value=""/>
+          </div>
+          <div class="input">
+            <label for="person_email_confirmation">Email confirmation</label>
+            <input id="person_email_confirmation" type="text" name="person[email_confirmation]" value=""/>
           </div>
           <div class="input">
             <label for="person_terms_of_service">Terms of service</label>
@@ -169,6 +185,14 @@ describe Formitas, 'rendering' do
           <div class="input">
             <label for="person_name">Name</label>
             <input id="person_name" type="text" name="person[name]" value="Markus Schirp"/>
+          </div>
+          <div class="input">
+            <label for="person_email">Email</label>
+            <input id="person_email" type="text" name="person[email]" value="mbj@seonic.net"/>
+          </div>
+          <div class="input">
+            <label for="person_email_confirmation">Email confirmation</label>
+            <input id="person_email_confirmation" type="text" name="person[email_confirmation]" value="mbj@seonic.net"/>
           </div>
           <div class="input">
             <label for="person_terms_of_service">Terms of service</label>
@@ -225,6 +249,19 @@ describe Formitas, 'rendering' do
           <div class="input">
             <label for="person_name">Name</label>
             <input id="person_name" type="text" name="person[name]" value="Markus Schirp"/>
+          </div>
+          <div class="input error">
+            <label for="person_email">Email</label>
+            <input id="person_email" type="text" name="person[email]" value=""/>
+            <div class="error-messages">
+              <ul>
+                <li class="error-message">Email: Invalid</li>
+              </ul>
+            </div>
+          </div>
+          <div class="input">
+            <label for="person_email_confirmation">Email confirmation</label>
+            <input id="person_email_confirmation" type="text" name="person[email_confirmation]" value=""/>
           </div>
           <div class="input error">
             <label for="person_terms_of_service">Terms of service</label>
