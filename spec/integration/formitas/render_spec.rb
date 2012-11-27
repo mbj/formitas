@@ -5,7 +5,7 @@ describe Formitas, 'rendering' do
   subject { renderer.render }
 
   let(:renderer) { Formitas::Renderer::Context::Form.new(form) }
-  
+
   let(:empty_form) do
     Formitas::Form.new(
       :context   => empty_context,
@@ -22,8 +22,8 @@ describe Formitas, 'rendering' do
   let(:valid_resource) do
     model.new(
       :membership => membership_a,
-      :surname => 'Mr', 
-      :name => 'Markus Schirp', 
+      :surname => 'Mr',
+      :name => 'Markus Schirp',
       :terms_of_service => true,
       :text => 'Foo'
     )
@@ -37,6 +37,9 @@ describe Formitas, 'rendering' do
       validates_presence_of :name
       validates_presence_of :text
       validates_acceptance_of :terms_of_service
+
+      def self.name; "FormitasTestValidator"; end
+      def self.inspect; name; end
     end
   end
 
@@ -49,15 +52,18 @@ describe Formitas, 'rendering' do
     )
   end
 
-  let(:membership_a) do 
-    Class.new do 
+  let(:membership_a) do
+    Class.new do
       def self.name; 'Membership-A'; end
+      def self.inspect; name; end
     end
   end
 
-  let(:membership_b) do 
-    Class.new do 
-      def self.name; 'Membership-B'; end 
+  let(:membership_b) do
+    Class.new do
+      def self.name; 'Membership-B'; end
+      def self.inspect; name; end
+      def inspect; self.class.name; end
     end
   end
 
@@ -69,6 +75,9 @@ describe Formitas, 'rendering' do
       attribute :name,              String
       attribute :text,              String
       attribute :terms_of_service,  Virtus::Attribute::Boolean
+
+      def self.name; 'FormitasTestModel'; end
+      def inspect; self.class.name; end
     end
   end
 
@@ -85,7 +94,7 @@ describe Formitas, 'rendering' do
         )
       ),
       Formitas::Field::Select::Single.build(
-        :surname, 
+        :surname,
         :collection => Formitas::Collection::String.new(
           :strings => %w(Mr Mrs)
         )
@@ -197,7 +206,7 @@ describe Formitas, 'rendering' do
             </select>
             <div class="error-messages">
               <ul>
-                <li class="error-message">Membership: Blank</li>
+                <li class="error-message">Membership: Presence</li>
               </ul>
             </div>
           </div>
@@ -209,7 +218,7 @@ describe Formitas, 'rendering' do
             </select>
             <div class="error-messages">
               <ul>
-                <li class="error-message">Surname: Blank</li>
+                <li class="error-message">Surname: Presence</li>
               </ul>
             </div>
           </div>
@@ -217,10 +226,15 @@ describe Formitas, 'rendering' do
             <label for="person_name">Name</label>
             <input id="person_name" type="text" name="person[name]" value="Markus Schirp"/>
           </div>
-          <div class="input">
+          <div class="input error">
             <label for="person_terms_of_service">Terms of service</label>
             <input type="hidden" name="person[terms_of_service]" value="0"/>
-            <input id="person_terms_of_service" type="checkbox" name="person[terms_of_service]" value="1" checked=""/>
+            <input id="person_terms_of_service" type="checkbox" name="person[terms_of_service]" value="1"/>
+            <div class="error-messages">
+              <ul>
+                <li class="error-message">Terms of service: Acceptance</li>
+              </ul>
+            </div>
           </div>
           <div class="input error">
             <label for="person_text">Text</label>
@@ -228,7 +242,7 @@ describe Formitas, 'rendering' do
             </textarea>
             <div class="error-messages">
               <ul>
-                <li class="error-message">Text: Blank</li>
+                <li class="error-message">Text: Presence</li>
               </ul>
             </div>
           </div>

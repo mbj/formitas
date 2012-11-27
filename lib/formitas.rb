@@ -55,15 +55,6 @@ module Formitas
     Undefined
   end
 
-  EmptyViolationSet = Class.new do
-    include Adamantium::Flat
-    def inspect; self.class.name; end
-    def on(name); []; end
-    def empty?; true; end
-    def self.name; 'Formitas::EmptyViolationSet'; end
-  end.new
-
-
   module Validator
 
     Valid = Class.new do

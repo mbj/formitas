@@ -76,7 +76,9 @@ module Formitas
         # @api private
         #
         def field_violations(name)
-          violations.on(name)
+          violations.select do |violation|
+            violation.attribute_name == name
+          end.freeze
         end
       end
     end

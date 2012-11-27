@@ -74,7 +74,7 @@ module Formitas
       # @api private
       #
       def violations
-        EmptyViolationSet
+        Set.new
       end
 
       # Return context with resource
