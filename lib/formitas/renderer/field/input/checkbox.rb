@@ -9,21 +9,6 @@ module Formitas
 
           TYPE = :checkbox
 
-          # Return checked value
-          #
-          # @return ["checked"]
-          #   if value is selected
-          #
-          # @return [""]
-          #   otherwise
-          #
-          # @api private
-          # 
-          def checked_value
-            selected?  ? 'checked' : ''
-          end
-          memoize :checked_value
-
           # Return extra input attributes
           #
           # @return [Hash]

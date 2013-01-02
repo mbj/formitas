@@ -18,9 +18,19 @@ module Formitas
     include AbstractType
 
     Empty = Class.new(self) do
+
+      # Return attribute value
+      #
+      # @param [Symbol] name
+      #
+      # @return [nil]
+      #   nil for all names
+      #
       def get(name); nil; end
+
     end.new.freeze
 
+    # Proxy names to method class
     class Proxy
       # Initialize object
       #

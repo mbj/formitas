@@ -27,7 +27,8 @@ LongParameterList:
   - Formitas::HTML#self.content_tag
   overrides: {}
 FeatureEnvy:
-  exclude: []
+  exclude: 
+  - Formitas::Field::String#html_value
   enabled: true
 ClassVariable:
   exclude: []
@@ -64,7 +65,8 @@ Duplication:
 UtilityFunction:
   max_helper_calls: 0
   exclude:
-  - Formitas::Fieldset::ClassMethods#const_missing 
+  - Formitas::Context::Empty#violations 
+  - Formitas::Field::String#html_value 
   enabled: true
 Attribute:
   exclude: []
