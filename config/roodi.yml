@@ -5,9 +5,9 @@ AssignmentInConditionalCheck:    { }
 CaseMissingElseCheck:            { }
 ClassLineCountCheck:             { line_count: 260 }
 ClassNameCheck:                  
-  pattern: !ruby/regexp /\A(?:GridFS|[A-Z]+|[A-Z][a-z](?:[A-Z]?[a-z])+)\z/
+  pattern: !ruby/regexp /\A(?:HTMLValue|[A-Z]+|[A-Z][a-z](?:[A-Z]?[a-z])+)\z/
 ClassVariableCheck:              { }
-CyclomaticComplexityBlockCheck:  { complexity: 1 }
+CyclomaticComplexityBlockCheck:  { complexity: 2 }
 CyclomaticComplexityMethodCheck: { complexity: 2 }
 EmptyRescueBodyCheck:            { }
 ForLoopCheck:                    { }
