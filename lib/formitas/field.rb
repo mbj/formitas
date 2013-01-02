@@ -5,17 +5,7 @@ module Formitas
 
   # Abstract base class for a form field 
   class Field
-    include Anima, AbstractType, Adamantium::Flat
-
-    # Attribute with default renderer lookup
-    class DefaultRenderer < Anima::Attribute
-      DEFAULT = Anima::Default::Generator.new do |object|
-        object.class.default_renderer
-      end
-    end
-
-    attribute :name
-    attribute :renderer, DefaultRenderer
+    include AbstractType, Adamantium::Flat, Anima.new(:name, :renderer)
 
     # Return binding for domain value
     #
@@ -34,7 +24,7 @@ module Formitas
     end
 
     def self.build(name, options = {})
-      new(options.merge(:name => name))
+      new({:renderer => default_renderer}.merge(options.merge(:name => name)))
     end
 
     # Abstract base class for <input> fields
@@ -55,9 +45,7 @@ module Formitas
 
     # Base class for value selections 
     class Select < self
-      include AbstractType
-
-      attribute :collection
+      include AbstractType, Anima.new(*(anima.attribute_names + [:collection]))
 
       # Form field with that allows a single selection
       class Single < self

@@ -1,11 +1,7 @@
 module Formitas
   # Abstract context without values
   class Context
-    include Adamantium::Flat, Anima, AbstractType
-
-    attribute :name
-    attribute :fields
-    attribute :validator
+    include Adamantium::Flat, AbstractType, Anima.new(:name, :fields, :validator)
 
     # Return binding for name
     #
@@ -84,15 +80,13 @@ module Formitas
       # @api private
       #
       def with_resource(resource)
-        Resource.new(self.class.attributes(self).merge(:resource => resource))
+        Resource.new(self.class.attributes_hash(self).merge(:resource => resource))
       end
     end
   
     # Context initialized from html params
     class HTML < self
-      attribute :params
-      attribute :domain_model
-      private :domain_model
+      include Anima.new(*(anima.attribute_names + [:params, :domain_model]))
 
       def domain_object
         domain_model.new(params)
@@ -102,7 +96,7 @@ module Formitas
 
     # Context initialized from domain object
     class Resource < self
-      attribute :resource
+      include Anima.new(*(anima.attribute_names + [:resource]))
     end
   end
 end

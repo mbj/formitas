@@ -101,7 +101,7 @@ describe Formitas, 'rendering' do
       ),
       Formitas::Field::Select::Single.build(
         :surname,
-        :collection => Formitas::Collection::String.new(
+        :collection => Formitas::Collection::String.build(
           :strings => %w(Mr Mrs)
         )
       ),

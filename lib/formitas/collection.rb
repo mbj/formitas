@@ -1,28 +1,23 @@
 module Formitas
   # Abstract collection base class
   class Collection
-    include Anima, AbstractType, Enumerable, Adamantium::Flat
-
-    # Attribute with default renderer lookup
-    class DefaultLabelRenderer < Anima::Attribute
-      DEFAULT = Anima::Default::Generator.new do |object|
-        object.class.default_label_renderer
-      end
-    end
+    include AbstractType, Enumerable, Adamantium::Flat, Anima.new(:label_renderer)
 
     def self.default_label_renderer
       self::DEFAULT_LABEL_RENDERER
     end
 
-    abstract_method :each
+    def self.build(attributes)
+      new({ :label_renderer => default_label_renderer }.merge(attributes))
+    end
 
-    attribute :label_renderer, DefaultLabelRenderer
+    abstract_method :each
 
     # Html value and domain value as string
     class String < self
-      DEFAULT_LABEL_RENDERER = Renderer::Label::HTMLValue
+      include Anima.new(*(anima.attribute_names + [:strings]))
 
-      attribute :strings
+      DEFAULT_LABEL_RENDERER = Renderer::Label::HTMLValue
 
       def each
         return to_enum unless block_given?
@@ -36,8 +31,7 @@ module Formitas
     # Mapp html value to domain value
     class Mapper < self
       DEFAULT_LABEL_RENDERER = Renderer::Label::DomainValue
-
-      attribute :mapping
+      include Anima.new(*(anima.attribute_names + [:mapping]))
 
       def each
         return to_enum unless block_given?

@@ -1,12 +1,7 @@
 module Formitas
   # A form context with action (root form)
   class Form 
-    include Anima, Adamantium::Flat, Delegation.new(:context)
-
-    attribute :action
-    attribute :method
-    attribute :enctype
-    attribute :context
+    include Adamantium::Flat, Delegation.new(:context), Anima.new(:action, :method, :enctype, :context)
 
     delegate :violations
     delegate :validator
@@ -33,7 +28,7 @@ module Formitas
     #
     def with_resource(domain_object)
       new_context = context.with_resource(domain_object)
-      self.class.new(self.class.attributes(self).merge(:context => new_context))
+      self.class.new(self.class.attributes_hash(self).merge(:context => new_context))
     end
   end
 end

@@ -2,11 +2,6 @@ module Formitas
   # Selectable option (does not need to be a <select><option...)
 
   class Option
-    include Anima, Adamantium::Flat
-
-    attribute :html_value
-    attribute :domain_value
-
-    include Equalizer.new(*attribute_set.map(&:name))
+    include Adamantium::Flat, Anima.new(:html_value, :domain_value)
   end
 end
