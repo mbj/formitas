@@ -5,11 +5,27 @@ module Formitas
 
       delegate :label, :html_value, :domain_value
 
+      # Test if option is selected
+      #
+      # @return [true]
+      #   if option is selected
+      #
+      # @return [false]
+      #   otherwise
+      #
+      # @api private
+      #
       def selected?
         context.selected?(domain_value)
       end
       memoize :selected?
 
+      # Return html fragment
+      #
+      # @return [HTML::Fragment]
+      #
+      # @api private
+      #
       def render
         attributes = { :value => html_value }
         attributes[:selected] = :selected if selected?

@@ -69,6 +69,8 @@ module Formitas
       # @return [Undefined]
       #   otherwise
       #
+      # @api private
+      #
       def domain_value
         field.domain_value(html_value)
       end
@@ -101,6 +103,8 @@ module Formitas
       # @return [Undefined]
       #   otherwise
       #
+      # @api private
+      #
       def html_value
         field.html_value(domain_value)
       end
@@ -116,6 +120,16 @@ module Formitas
 
     private
 
+      # Initialize object
+      #
+      # @param [Field] field
+      #
+      # @param [Object] domain_object
+      #
+      # @return [undefined]
+      #
+      # @api private
+      #
       def initialize(field, domain_value)
         super(field)
         @domain_value = domain_value

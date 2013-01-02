@@ -20,10 +20,26 @@ module Formitas
     end.new.freeze
 
     class Proxy
+      # Initialize object
+      #
+      # @param [Object] object
+      #
+      # @return [undefined]
+      #
+      # @api private
+      #
       def initialize(object)
         @object = object
       end
 
+      # Return attribute value
+      #
+      # @param [Symbol] name
+      #
+      # @return [Object]
+      #
+      # @api private
+      #
       def get(name)
         @object.public_send(name)
       end

@@ -131,6 +131,8 @@ module Formitas
 
       # Return errors html
       #
+      # @return [HTML::Fragment]
+      #
       # @api private
       #
       def errors_html

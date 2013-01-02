@@ -29,6 +29,8 @@ module Formitas
 
     # Return violations
     #
+    # @return [Enumerable<Violations>]
+    #
     # @api private
     #
     def violations
@@ -55,7 +57,7 @@ module Formitas
 
       # Return binding for name
       #
-      # @param [Symbol] name
+      # @param [Symbol] field_name
       #
       # @return [Binding::Empty]
       #
@@ -77,6 +79,8 @@ module Formitas
       #
       # @param [Resource] resource
       #
+      # @return [Context::Resource]
+      #
       # @api private
       #
       def with_resource(resource)
@@ -88,6 +92,12 @@ module Formitas
     class HTML < self
       include Anima.new(*(anima.attribute_names + [:params, :domain_model]))
 
+      # Return domain object
+      #
+      # @return [Object]
+      #
+      # @api private
+      #
       def domain_object
         domain_model.new(params)
       end

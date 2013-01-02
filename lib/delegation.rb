@@ -9,8 +9,22 @@ require 'adamantium'
 class Delegation < ::Module
   include Adamantium::Flat, AbstractType, Equalizer.new(:target_name)
 
+  # Return delegation target name
+  #
+  # @return [Symbol]
+  #
+  # @api private
+  #
   attr_reader :target_name
 
+  # Initialize object
+  #
+  # @param [Symbol] target_name
+  #
+  # @return [undefined]
+  #
+  # @api private
+  #
   def initialize(target_name)
     @target_name = target_name
   end
@@ -35,7 +49,20 @@ private
   class Definer
     include Adamantium::Flat, Equalizer.new(:scope, :target_name)
 
+    # Return scope
+    #
+    # @return [Model, Class] scope
+    #
+    # @api private
+    #
     attr_reader :scope
+
+    # Return target name
+    #
+    # @return [Symbol] 
+    #
+    # @api private
+    #
     attr_reader :target_name
 
     # Define names to delegate

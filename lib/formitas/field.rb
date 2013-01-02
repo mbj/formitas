@@ -19,10 +19,25 @@ module Formitas
       Binding::Domain.new(self, domain_value)
     end
 
+    # Return default renderer
+    #
+    # @return [Class:Renderer::Field]
+    #
+    # @api private
+    #
     def self.default_renderer
       self::DEFAULT_RENDERER
     end
 
+    # Build field with defaults
+    #
+    # @param [Symbol] name
+    # @param [Hash] options
+    #
+    # @return [Field]
+    #
+    # @api private
+    #
     def self.build(name, options = {})
       new({:renderer => default_renderer}.merge(options.merge(:name => name)))
     end
@@ -31,6 +46,12 @@ module Formitas
     class String < self
       DEFAULT_RENDERER = Renderer::Field::Input::Text
 
+      # Return html value
+      #
+      # @return [String]
+      #
+      # @api private
+      #
       def html_value(object)
         object.to_s
       end

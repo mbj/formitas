@@ -5,6 +5,12 @@ module Formitas
       # Abstract class for <input> tag fields
       class Textarea < self
 
+        # Return input html
+        #
+        # @return [HTML::Fragment]
+        #
+        # @api private
+        #
         def input_html
           HTML.textarea(html_value, { 
             :id => html_id, 

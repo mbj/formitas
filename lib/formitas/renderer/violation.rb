@@ -17,6 +17,8 @@ module Formitas
 
       # Return human attribute name
       #
+      # @return [String]
+      #
       # @api private
       #
       def human_attribute_name

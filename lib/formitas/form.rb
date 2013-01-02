@@ -24,6 +24,8 @@ module Formitas
     #
     # @param [Object] resource
     #
+    # @return [Context]
+    #
     # @api private
     #
     def with_resource(domain_object)

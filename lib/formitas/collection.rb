@@ -3,14 +3,38 @@ module Formitas
   class Collection
     include AbstractType, Enumerable, Adamantium::Flat, Anima.new(:label_renderer)
 
+    # Return default label renderer
+    #
+    # @return [Class:Renderer::Label]
+    #
+    # @api private
+    #
     def self.default_label_renderer
       self::DEFAULT_LABEL_RENDERER
     end
 
+    # Build collection with defaults
+    #
+    # @param [Hash] attributes
+    #
+    # @return [Collection]
+    #
+    # @api private
+    #
     def self.build(attributes)
       new({ :label_renderer => default_label_renderer }.merge(attributes))
     end
 
+    # Enumerate options
+    #
+    # @return [self]
+    #   if block given
+    #
+    # @return [Enumerator<Formitas::Option>]
+    #   otherwise
+    #
+    # @api private
+    #
     abstract_method :each
 
     # Html value and domain value as string
@@ -19,6 +43,16 @@ module Formitas
 
       DEFAULT_LABEL_RENDERER = Renderer::Label::HTMLValue
 
+      # Enumerate options
+      #
+      # @return [self]
+      #   if block given
+      #
+      # @return [Enumerator<Formitas::Option>]
+      #   otherwise
+      #
+      # @api private
+      #
       def each
         return to_enum unless block_given?
 
@@ -28,11 +62,21 @@ module Formitas
       end
     end
 
-    # Mapp html value to domain value
+    # Map html value to domain value
     class Mapper < self
       DEFAULT_LABEL_RENDERER = Renderer::Label::DomainValue
       include Anima.new(*(anima.attribute_names + [:mapping]))
 
+      # Enumerate options
+      #
+      # @return [self]
+      #   if block given
+      #
+      # @return [Enumerator<Formitas::Option>]
+      #   otherwise
+      #
+      # @api private
+      #
       def each
         return to_enum unless block_given?
 

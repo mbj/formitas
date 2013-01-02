@@ -35,7 +35,7 @@ module Formitas
 
       # Return html name
       #
-      # @param [Field] name
+      # @param [Field] field_name
       #
       # @return [String]
       #
