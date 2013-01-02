@@ -40,11 +40,27 @@ module Formitas
             attributes
           end
 
+          # Return html value
+          #
+          # @return [String]
+          #
+          # @api private
+          #
           abstract_method :html_value
 
+          # Test if input is selected
+          #
+          # @return [true]
+          #   if selected
+          #
+          # @return [false]
+          #   otherwise
+          #
+          # @api private
+          #
           abstract_method :selected?
 
-          # Renderer for boolena checkbox
+          # Renderer for boolean checkbox
           class Boolean < self
 
             # Test if input is selected

@@ -8,10 +8,12 @@ require 'aequitas'
 require 'delegation'
 require 'html'
 
+# Library namespace
 module Formitas
 
   Undefined = Object.new.freeze
 
+  # Form input values
   class Values
     include AbstractType
 
