@@ -47,7 +47,6 @@ describe Formitas, 'rendering' do
     end
   end
 
-
   let(:empty_context) do
     Formitas::Context::Empty.new(
       :name      => :person,

@@ -1,5 +1,5 @@
 module Formitas
-  # Abstract context without values
+  # Abstract context base class
   class Context
     include Adamantium::Flat, AbstractType, Anima.new(:name, :fields, :validator)
 
@@ -67,7 +67,7 @@ module Formitas
 
       # Return violations
       #
-      # @return [Formtias::Validator::Valid]
+      # @return [Enumerable<Violation>]
       #
       # @api private
       #
@@ -92,14 +92,14 @@ module Formitas
     class HTML < self
       include Anima.new(*(anima.attribute_names + [:params, :domain_model]))
 
-      # Return domain object
+      # Return resource
       #
       # @return [Object]
       #
       # @api private
       #
-      def domain_object
-        domain_model.new(params)
+      def resource
+        doman_model.new(params)
       end
       memoize :domain_object
     end
