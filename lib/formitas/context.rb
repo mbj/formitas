@@ -101,7 +101,7 @@ module Formitas
       def resource
         doman_model.new(params)
       end
-      memoize :domain_object
+      memoize :resource
     end
 
     # Context initialized from domain object
