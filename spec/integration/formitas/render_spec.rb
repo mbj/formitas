@@ -108,7 +108,8 @@ describe Formitas, 'rendering' do
       Formitas::Field::String.build(:email),
       Formitas::Field::String.build(:email_confirmation),
       Formitas::Field::Boolean.build(:terms_of_service),
-      Formitas::Field::String.build(:text, :renderer => Formitas::Renderer::Field::Textarea)
+      Formitas::Field::String.build(:text, :renderer => Formitas::Renderer::Field::Textarea),
+      Formitas::Field::Submit.build
     ]
   end
 
@@ -153,6 +154,10 @@ describe Formitas, 'rendering' do
             <label for="person_text">Text</label>
             <textarea id="person_text" name="person[text]">
             </textarea>
+          </div>
+          <div class="input">
+            <label for="person_submit">Submit</label>
+            <input id="person_submit" type="submit" value="" name="person[submit]"/>
           </div>
         </form>
       HTML
@@ -201,6 +206,10 @@ describe Formitas, 'rendering' do
           <div class="input">
             <label for="person_text">Text</label>
             <textarea id="person_text" name="person[text]">Foo</textarea>
+          </div>
+          <div class="input">
+            <label for="person_submit">Submit</label>
+            <input id="person_submit" type="submit" value="submit" name="person[submit]"/>
           </div>
         </form>
       HTML
@@ -281,6 +290,10 @@ describe Formitas, 'rendering' do
                 <li class="error-message">Text: Presence</li>
               </ul>
             </div>
+          </div>
+          <div class="input">
+            <label for="person_submit">Submit</label>
+            <input id="person_submit" type="submit" value="submit" name="person[submit]"/>
           </div>
         </form>
       HTML

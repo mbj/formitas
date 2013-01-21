@@ -29,6 +29,16 @@ module Formitas
       self::DEFAULT_RENDERER
     end
 
+    # Return domain value for resource
+    #
+    # @param [Object] resource
+    #
+    # @return [Object]
+    #
+    def domain_value(resource)
+      resource.public_send(name)
+    end
+
     # Build field with defaults
     #
     # @param [Symbol] name
@@ -40,43 +50,6 @@ module Formitas
     #
     def self.build(name, options = {})
       new({:renderer => default_renderer}.merge(options.merge(:name => name)))
-    end
-
-    # Abstract base class for <input> fields
-    class String < self
-      DEFAULT_RENDERER = Renderer::Field::Input::Text
-
-      # Return html value
-      #
-      # @return [String]
-      #
-      # @api private
-      #
-      def html_value(object)
-        object.to_s
-      end
-    end
-
-    # Boolean field with true and false as domain values
-    class Boolean < self
-      include Equalizer.new(:renderer)
-
-      DEFAULT_RENDERER = Renderer::Field::Input::Checkbox::Boolean
-    end
-
-    # Base class for value selections 
-    class Select < self
-      include AbstractType, Anima.new(*(anima.attribute_names + [:collection]))
-
-      # Form field with that allows a single selection
-      class Single < self
-        DEFAULT_RENDERER = Renderer::Field::Select::Single
-      end
-
-      # Form field with that allows multiple selections
-      class Multiple < self
-        DEFAULT_RENDERER = Renderer::Field::Select::Single
-      end
     end
   end
 end

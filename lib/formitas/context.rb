@@ -47,7 +47,7 @@ module Formitas
     # @api private
     #
     def domain_value(name)
-      resource.public_send(name)
+      field(name).domain_value(resource)
     end
   end
 
