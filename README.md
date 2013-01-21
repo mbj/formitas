@@ -21,6 +21,7 @@ Credits
 -------
 
 * Markus Schirp ([mbj](https://github.com/mbj))
+* Firas Zaidan ([zaidan](https://github.com/zaidan))
 
 Contributing
 -------------
