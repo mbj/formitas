@@ -1,6 +1,8 @@
 formitas
 ========
 
+THIS IS A SPIKE.
+
 [![Build Status](https://secure.travis-ci.org/zaidan/formitas.png?branch=master)](http://travis-ci.org/zaidan/formitas)
 [![Dependency Status](https://gemnasium.com/zaidan/formitas.png)](https://gemnasium.com/zaidan/formitas)
 [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/zaidan/formitas)
