@@ -34,7 +34,7 @@ module Formitas
     # @api private
     #
     def violations
-      validator.new(resource).violations
+      validator.validate(resource).violations
     end
     memoize :violations
 

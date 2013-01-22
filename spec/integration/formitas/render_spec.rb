@@ -32,8 +32,7 @@ describe Formitas, 'rendering' do
   end
 
   let(:validator) do
-    Class.new do
-      include Aequitas
+    Aequitas::Validator.build do
       validates_presence_of     :membership
       validates_presence_of     :surname
       validates_presence_of     :name
@@ -41,9 +40,6 @@ describe Formitas, 'rendering' do
       validates_format_of       :email, :format => :email_address
       validates_confirmation_of :email
       validates_acceptance_of   :terms_of_service
-
-      def self.name; "FormitasTestValidator"; end
-      def self.inspect; name; end
     end
   end
 
@@ -157,7 +153,7 @@ describe Formitas, 'rendering' do
           </div>
           <div class="input">
             <label for="person_submit">Submit</label>
-            <input id="person_submit" type="submit" value="" name="person[submit]"/>
+            <input id="person_submit" type="submit" value="Submit" name="person[submit]"/>
           </div>
         </form>
       HTML
@@ -209,7 +205,7 @@ describe Formitas, 'rendering' do
           </div>
           <div class="input">
             <label for="person_submit">Submit</label>
-            <input id="person_submit" type="submit" value="submit" name="person[submit]"/>
+            <input id="person_submit" type="submit" value="Submit" name="person[submit]"/>
           </div>
         </form>
       HTML
@@ -293,7 +289,7 @@ describe Formitas, 'rendering' do
           </div>
           <div class="input">
             <label for="person_submit">Submit</label>
-            <input id="person_submit" type="submit" value="submit" name="person[submit]"/>
+            <input id="person_submit" type="submit" value="Submit" name="person[submit]"/>
           </div>
         </form>
       HTML
