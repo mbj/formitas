@@ -15,7 +15,7 @@ module Formitas
           HTML.input( 
             :id => html_id, 
             :type => :submit,
-            :value => html_value,
+            :value => label_text,
             :name => html_name
           )
         end
