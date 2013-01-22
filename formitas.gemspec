@@ -22,6 +22,6 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency('i18n',          '~> 0.6.1')
   gem.add_runtime_dependency('rack',          '~> 1.4.1')
   gem.add_runtime_dependency('virtus',        '~> 0.5.2')
-  gem.add_runtime_dependency('mbj-inflector', '~> 0.0.2')
+  gem.add_runtime_dependency('inflecto',      '~> 0.0.2')
 
 end

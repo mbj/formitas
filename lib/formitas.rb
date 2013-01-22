@@ -1,6 +1,6 @@
 require 'abstract_type'
 require 'adamantium'
-require 'inflector'
+require 'inflecto'
 require 'anima'
 require 'rack'
 require 'i18n'

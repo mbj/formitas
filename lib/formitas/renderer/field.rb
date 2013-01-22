@@ -52,7 +52,7 @@ module Formitas
       #
       def label_text
         name = self.name
-        I18n.translate(name, :scope => [context_name, :label], :default => Inflector.humanize(name))
+        I18n.translate(name, :scope => [context_name, :label], :default => Inflecto.humanize(name))
       end
       memoize :label_text
 

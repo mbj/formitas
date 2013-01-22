@@ -43,7 +43,7 @@ module Formitas
       # @api private
       #
       def dumb_violation_message
-        "#{human_attribute_name}: #{Inflector.humanize(type)}".freeze
+        "#{human_attribute_name}: #{Inflecto.humanize(type)}".freeze
       end
 
       # Return message
