@@ -124,7 +124,7 @@ module Formitas
       #
       # @param [Field] field
       #
-      # @param [Object] domain_object
+      # @param [Object] resource
       #
       # @return [undefined]
       #

@@ -13,51 +13,6 @@ module Formitas
 
   Undefined = Object.new.freeze
 
-  # Form input values
-  class Values
-    include AbstractType
-
-    Empty = Class.new(self) do
-
-      # Return attribute value
-      #
-      # @param [Symbol] name
-      #
-      # @return [nil]
-      #   nil for all names
-      #
-      def get(name); nil; end
-
-    end.new.freeze
-
-    # Proxy names to method class
-    class Proxy
-      # Initialize object
-      #
-      # @param [Object] object
-      #
-      # @return [undefined]
-      #
-      # @api private
-      #
-      def initialize(object)
-        @object = object
-      end
-
-      # Return attribute value
-      #
-      # @param [Symbol] name
-      #
-      # @return [Object]
-      #
-      # @api private
-      #
-      def get(name)
-        @object.public_send(name)
-      end
-    end
-  end
-
   # Return translation
   #
   # I18n interface does not support :default on multi lookups so we do 
@@ -113,6 +68,7 @@ require 'formitas/renderer/violation'
 require 'formitas/renderer/violation_set'
 
 require 'formitas/form'
+require 'formitas/input'
 require 'formitas/field'
 require 'formitas/field/string'
 require 'formitas/field/boolean'

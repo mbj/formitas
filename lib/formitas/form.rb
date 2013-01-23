@@ -29,9 +29,9 @@ module Formitas
     #
     # @api private
     #
-    def with_resource(domain_object)
+    def with_resource(resource)
       util = self.class
-      new_context = context.with_resource(domain_object)
+      new_context = context.with_resource(resource)
       util.new(util.attributes_hash(self).merge(:context => new_context))
     end
   end
