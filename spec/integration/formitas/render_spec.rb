@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'virtus'
 
 describe Formitas, 'rendering' do
   subject { renderer.render }
@@ -16,7 +15,15 @@ describe Formitas, 'rendering' do
   end
 
   let(:invalid_resource) do
-    model.new(:name => 'Markus Schirp')
+    model.new(
+      :name               => 'Markus Schirp',
+      :membership         => nil,
+      :surname            => nil,
+      :email              => nil,
+      :email_confirmation => nil,
+      :terms_of_service   => nil,
+      :text               => nil
+    )
   end
 
   let(:valid_resource) do
@@ -68,15 +75,7 @@ describe Formitas, 'rendering' do
 
   let(:model) do
     Class.new do
-      include Virtus
-      attribute :membership,         Object
-      attribute :surname,            String
-      attribute :name,               String
-      attribute :email,              String
-      attribute :email_confirmation, String
-      attribute :text,               String
-      attribute :terms_of_service,   Virtus::Attribute::Boolean
-                                     
+      include Anima.new(:membership, :surname, :name, :email, :email_confirmation, :text, :terms_of_service)
       def self.name; 'FormitasTestModel'; end
       def inspect; self.class.name; end
     end

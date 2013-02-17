@@ -5,7 +5,7 @@ module Formitas
 
     # Initialize object
     #
-    # @param [Enumerable<Field>]
+    # @param [Enumerable<Field>] fields
     #
     # @return [undefined]
     #

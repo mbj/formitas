@@ -28,6 +28,15 @@ module Formitas
         :submit
       end
 
+      # Build  submit field
+      #
+      # @param [Symbol] name
+      # @param [Hash] options
+      #
+      # @return [Field::Submit]
+      #
+      # @api private
+      #
       def self.build(name=:submit, options={})
         super
       end

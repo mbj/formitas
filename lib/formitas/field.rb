@@ -35,6 +35,8 @@ module Formitas
     #
     # @return [Object]
     #
+    # @api private
+    #
     def domain_value(resource)
       resource.public_send(name)
     end
