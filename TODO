@@ -1,3 +1,5 @@
 * Get a rid of Anima and attributes in all domain classes!
+* Move all renderers in separete projects
+* Compile ducktraps from form structure
 * Compose only from two objects!
 * Add full unit spec coverage
