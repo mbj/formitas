@@ -3,9 +3,9 @@ module Formitas
     class Field
       class Input 
 
-        # Renderer for <input type="number">
-        class Number < self
-          TYPE = :number
+        # Renderer for <input type="date">
+        class Date < self
+          TYPE = :date
 
           # Return extra input attributes
           #
